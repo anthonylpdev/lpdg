@@ -2,9 +2,11 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class ItemOrder extends Model
+class ItemOrder extends Pivot
 {
-    //
+    protected $casts = [
+        'quantity' => 'integer',
+    ];
 }
