@@ -1,4 +1,5 @@
 let mix = require('laravel-mix');
+const path = require('path')
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -14,6 +15,18 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .version()
     .disableNotifications();
+
+mix.webpackConfig({
+    resolve: {
+        alias: {
+            '@js': path.resolve('resources/js'),
+            '@sass': path.resolve('resources/sass'),
+            '@assets': path.resolve('resources/assets'),
+        }
+    }
+});
+
+// vue$: 'vue/dist/vue.runtime.esm.js',
 
 // Full API
 // mix.js(src, output);

@@ -1,4 +1,91 @@
 @import "~reset-css/sass/reset";
-@import "fonts";
-@import "variables";
-@import "mixins";
+@import "./fonts";
+@import "./variables";
+@import "./mixins";
+* {
+    outline-color: $color-default;
+    outline-style: none;
+    ::selection {
+        background-color: $gray-light;
+    }
+}
+body {
+    font-family: Muli, sans-serif;
+    background-color: #F7F8FC;
+}
+select {
+    font-family: Muli, sans-serif;
+    -webkit-appearance: none;
+    appearance: none;
+    position: relative;
+    &::-ms-expand {
+        display: none;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}
+h2 {
+    padding-left: 32px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 19px;
+    line-height: 24px;
+    letter-spacing: 0.4px;
+    color: $gray-black;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background-color: #fff;
+    border: #DFE0EB 1px solid;
+    border-radius: 5px;
+    margin-top: 16px;
+    h2 {
+        padding-left: 32px;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 19px;
+        line-height: 24px;
+        letter-spacing: 0.4px;
+        color: $gray-black;
+    }
+}
+table {
+    tr {
+        input {
+            &[type="checkbox"] {
+                display: block;
+                height: 20px;
+                width: 20px;
+                appearance: none;
+                border: 2px solid $gray-light;
+                box-sizing: border-box;
+                border-radius: 50%;
+                &::-ms-check {
+                    display: none;
+                }
+                &:focus {
+                    outline: none;
+                }
+                &:hover {
+                    cursor: pointer;
+                }
+                &:before {
+                    display: block;
+                    @include font-icon();
+                    content: "\E919";
+                    color: #ffffff;
+                    font-size: 10px;
+                    text-align: center;
+                    line-height: 18px;
+                }
+                &:checked{
+                    background-color: $color-default;
+                    border-color: $color-default;
+                }
+            }
+        }
+    }
+}
