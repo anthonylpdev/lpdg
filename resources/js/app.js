@@ -19,9 +19,10 @@ const router = new VueRouter({
             component: Home
         },
         {
-            path: '/order',
+            path: '/order/:status?',
             name: 'order',
-            component: Order
+            component: Order,
+            props: true
         },
         {
             path: '/factory',

@@ -1,5 +1,20 @@
 <template>
     <div class="table-container">
+        <nav class="status-menu">
+            <ul class="list">
+                <li class="item"
+                    :class="{'is-active': status === slug}"
+                    :key="slug"
+                    v-for="(label, slug) in filters">
+                    <router-link
+                        :class="{'is-active': false}"
+                        :to="`/order/${slug}`"
+                        class="link">
+                        {{ label }}
+                    </router-link>
+                </li>
+            </ul>
+        </nav>
         <div class="table-inner">
             <div class="table-header">
                 <h2>Toutes les commandes</h2>
@@ -18,7 +33,6 @@
                     <a class="add" href="#">Ajouter</a>
                 </div>
             </div>
-            <!--<slot name="header"></slot>-->
             <div class="table-body">
                 <table>
                     <thead>
@@ -43,14 +57,41 @@
                                 v-model="userIds"></td>
                         <td
                             v-for="(value, type) in row"
-                            v-if="type !== 'id'">{{ value }}</td>
+                            v-if="type !== 'id'">{{ value }}
+                        </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <!--<slot name="footer"
-                  :updateParam="updateParam"
-                  :pagination="pagination"></slot>-->
+            <div class="table-footer">
+                <div class="select-part">
+                    <span>Lignes par page :</span>
+                    <select
+                        class="pagination"
+                        id="pagination"
+                        name="pagination">
+                        <option
+                            v-for="nb in navigation.perPageList"
+                            :selected="nb.toString() === navigation.perPage"
+                            :value="nb">{{ nb }}
+                        </option>
+                    </select>
+                    <span class="icon icon-dropdown-up"></span>
+                </div>
+                <span class="display-part">{{ navigation.firstItemNumber }}-{{ navigation.lastItemNumber }} sur {{ navigation.totalItems }}</span>
+                <div class="arrows-part">
+                    <router-link
+                        class="icon icon-arrow---top prev"
+                        :class="{'is-disabled': navigation.previousPageUrl === '#'}"
+                        :to="navigation.previousPageUrl">
+                    </router-link>
+                    <router-link
+                        class="icon icon-arrow---top next"
+                        :class="{'is-disabled': navigation.nextPageUrl === '#'}"
+                        :to="navigation.nextPageUrl"
+                    ></router-link>
+                </div>
+            </div>
         </div>
         <!--<p class="no-content" v-else>Aucun contenu...</p>-->
     </div>
@@ -60,12 +101,20 @@
     import MenuFilter from './MenuFilter';
 
     export default {
-        props: ['isSelectable', 'items', 'filtersToDisplay', 'currentNavigation'],
+        props: {
+            isSelectable: Boolean,
+            items: Object,
+            filters: Object,
+            navigation: Object,
+            status: {
+                type: String,
+                default: 'published'
+            },
+        },
         components: {MenuFilter},
         methods: {
             selectAll: function() {
                 this.userIds = [];
-                console.log(this.allSelected);
                 if (this.allSelected) {
                     for (let item in this.items.rows) {
                         const currentItem = this.items.rows[item];
@@ -84,6 +133,9 @@
                 userIds: [],
             };
         },
+        mounted() {
+            console.log(this.status);
+        },
     };
 </script>
 
@@ -91,8 +143,45 @@
     @import '@sass/_variables.scss';
     @import '@sass/_mixins.scss';
     .table-container {
+        .status-menu {
+            .list {
+                display: flex;
+                .item {
+                    .link {
+                        text-decoration: none;
+                        font-style: normal;
+                        font-size: 14px;
+                        line-height: 18px;
+                        letter-spacing: 0.2px;
+                        color: $gray-light;
+                    }
+                    &.is-active {
+                        .link {
+                            color: $color-default;
+                            font-weight: bold;
+                        }
+                    }
+                    &:not(:first-child) {
+                        position: relative;
+                        padding-left: 8px;
+                        margin-left: 8px;
+                        &:before {
+                            content: '|';
+                            color: $gray-light;
+                            position: absolute;
+                            left: -3px;
+                            top: 0;
+                        }
+                    }
+                }
+            }
+        }
         .table-inner {
-            margin-top: 30px;
+            margin-top: 16px;
+            background-color: #fff;
+            border: #DFE0EB 1px solid;
+            border-radius: 5px;
+            padding-top: 27px;
             .table-header {
                 display: flex;
                 justify-content: space-between;
@@ -319,7 +408,6 @@
                 display: flex;
                 justify-content: flex-end;
                 height: 24px;
-                line-height: 24px;
                 padding: 24px 32px;
                 font-style: normal;
                 font-weight: normal;
