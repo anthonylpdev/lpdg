@@ -38,7 +38,6 @@
     @import '@sass/_variables.scss';
 
     .status-menu {
-        margin-bottom: 16px;
         .list {
             display: flex;
             .item {

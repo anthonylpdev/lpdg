@@ -3,8 +3,9 @@
         <Table
             :isSelectable="true"
             :items="items"
-            :filtersToDisplay="filtersToDisplay"
-            :currentNavigation="currentNavigation"
+            :filters="filters"
+            :navigation="navigation"
+            :status="status"
         ></Table>
     </div>
 </template>
@@ -61,22 +62,55 @@
                             'articles': 3,
                             'date': 1625417400,
                         },
+                        {
+                            'id': 15,
+                            'name': 'Camille Giraud',
+                            'payed': true,
+                            'articles': 4,
+                            'date': 1625417400,
+                        },
+                        {
+                            'id': 16,
+                            'name': 'Elouan Guillaume',
+                            'payed': true,
+                            'articles': 3,
+                            'date': 1625417400,
+                        },
+                        {
+                            'id': 17,
+                            'name': 'Camille Giraud',
+                            'payed': true,
+                            'articles': 4,
+                            'date': 1625417400,
+                        },
                     ],
                 },
-                filtersToDisplay: {
+                filters: {
                     'published': 'Publiées',
                     'archived': 'Archivées',
                     'trashed': 'Corbeille',
                 },
-                currentNavigation: {
+                navigation: {
                     perPage: 8,
+                    perPageList: [8, 16],
                     page: 1,
-                    status: 'published',
+                    firstItemNumber: 1,
+                    lastItemNumber: 8,
+                    totalItems: 300,
+                    previousPageUrl: '#prev',
+                    nextPageUrl: '#next',
                 },
             };
         },
+        props: {
+            status : String
+        },
         mounted() {
             console.log('Order mounted.')
+        },
+        beforeRouteUpdate (to, from, next) {
+            //console.log(to.params);
+            next();
         }
     }
 </script>
