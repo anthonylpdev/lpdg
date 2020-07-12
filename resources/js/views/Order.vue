@@ -107,10 +107,6 @@
         },
         mounted() {
             console.log('Order mounted.')
-        },
-        beforeRouteUpdate (to, from, next) {
-            //console.log(to.params);
-            next();
         }
     }
 </script>
