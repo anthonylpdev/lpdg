@@ -7,7 +7,6 @@
                     :key="slug"
                     v-for="(label, slug) in filters">
                     <router-link
-                        :class="{'is-active': false}"
                         :to="`/order/${slug}`"
                         class="link">
                         {{ label }}
@@ -44,19 +43,19 @@
                                 :value="allSelected"
                                 v-model="allSelected">
                         </th>
-                        <th v-for="header in items.headers">{{ header }}</th>
+                        <th v-for="header in headers">{{ header }}</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr :key="row.id" v-for="row in items.rows">
+                    <tr :key="item.id" v-for="item in items">
                         <td v-if="isSelectable">
                             <input
                                 type="checkbox"
                                 @change="select"
-                                :value="row.id"
+                                :value="item.id"
                                 v-model="userIds"></td>
                         <td
-                            v-for="(value, type) in row"
+                            v-for="(value, type) in item"
                             v-if="type !== 'id'">{{ value }}
                         </td>
                     </tr>
@@ -71,7 +70,7 @@
                         id="pagination"
                         name="pagination">
                         <option
-                            v-for="nb in navigation.perPageList"
+                            v-for="nb in perPageList"
                             :selected="nb.toString() === navigation.perPage"
                             :value="nb">{{ nb }}
                         </option>
@@ -99,13 +98,13 @@
 
 <script>
     import MenuFilter from './MenuFilter';
+    import axios from 'axios';
 
     export default {
         props: {
             isSelectable: Boolean,
-            items: Object,
-            filters: Object,
-            navigation: Object,
+            itemSlug: String,
+            headers: Array,
             status: {
                 type: String,
                 default: 'published'
@@ -116,8 +115,8 @@
             selectAll: function() {
                 this.userIds = [];
                 if (this.allSelected) {
-                    for (let item in this.items.rows) {
-                        const currentItem = this.items.rows[item];
+                    for (let item in this.rows) {
+                        const currentItem = this.rows[item];
                         this.userIds.push(currentItem.id);
                     }
                 }
@@ -125,16 +124,45 @@
             select: function() {
                 this.allSelected = false;
             },
+            fetchData: function() {
+                axios.get(window.location.origin + '/api/' + this.itemSlug, {
+                    params: {
+                        perPage: this.navigation.perPage,
+                        page: this.navigation.page,
+                        status: this.status,
+                    }
+                }).then((result) => {
+                    console.log(result);
+                    this.items = result.data.items;
+                    this.navigation = result.data.navigation;
+                });
+            },
         },
         data: function() {
             return {
                 selected: [],
                 allSelected: false,
                 userIds: [],
+                filters: {
+                    'published': 'Publiées',
+                    'archived': 'Archivées',
+                    'trashed': 'Corbeille',
+                },
+                perPageList: [8, 16],
+                navigation: {
+                    perPage: 8,
+                    page: 1,
+                    firstItemNumber: 1,
+                    lastItemNumber: 8,
+                    totalItems: 300,
+                    previousPageUrl: '#prev',
+                    nextPageUrl: '#next',
+                },
+                items: [],
             };
         },
         mounted() {
-            console.log(this.status);
+            this.fetchData({});
         },
     };
 </script>
@@ -189,8 +217,6 @@
                 .right-part {
                     display: flex;
                     justify-content: flex-end;
-                    // margin-bottom: 30px;
-                    // margin-top: -32px;
                     padding-right: 34px;
                     form.search {
                         position: relative;

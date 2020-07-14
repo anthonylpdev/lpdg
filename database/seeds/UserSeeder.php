@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'anthony',
             'email' => 'anthony.lopezpro@gmail.com',
-            'password' => '$2y$10$2xrcKyIoxNDhmWy3wrknhOirDIyBati4MJLObfOVhPSbll.Q6ds56',
+            'password' => '$2y$10$Otl6XaM/FoFHP2YTIeduqO7wc24k9/BgBf7Ip791Qy5sN9EaNTNv2',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
