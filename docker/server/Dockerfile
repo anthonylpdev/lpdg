@@ -91,3 +91,7 @@ ENV COMPOSER_HOME /usr/bin/composer
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 WORKDIR /var/www
+
+# Install Sudo
+RUN apt-get update && apt-get install -y \
+  sudo \
