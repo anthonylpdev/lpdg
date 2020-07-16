@@ -29,7 +29,7 @@
                         </select>
                         <span class="icon icon-dropdown-up"></span>
                     </div>
-                    <a class="add" href="#">Ajouter</a>
+                    <a class="btn" href="#">Ajouter</a>
                 </div>
             </div>
             <div class="table-body">
@@ -284,21 +284,8 @@
                             transform: rotate(180deg);
                         }
                     }
-                    a.add {
-                        display: block;
-                        width: 140px;
+                    a.btn {
                         margin-left: 48px;
-                        background-color: $color-default;
-                        box-shadow: 0 4px 12px rgba(55, 81, 255, 0.24);
-                        border-radius: 8px;
-                        text-decoration: none;
-                        font-style: normal;
-                        font-weight: 600;
-                        font-size: 14px;
-                        line-height: 40px;
-                        text-align: center;
-                        letter-spacing: 0.2px;
-                        color: #FFFFFF;
                     }
                 }
             }

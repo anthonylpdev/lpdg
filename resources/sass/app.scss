@@ -86,3 +86,21 @@ table {
         }
     }
 }
+.btn {
+    display: block;
+    width: 140px;
+    background-color: $color-default;
+    box-shadow: 0 4px 12px rgba(55, 81, 255, 0.24);
+    border-radius: 8px;
+    text-decoration: none;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 40px;
+    text-align: center;
+    letter-spacing: 0.2px;
+    color: #FFFFFF;
+}
+
+// Page
+@import "page/forms";
