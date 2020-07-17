@@ -29,7 +29,7 @@
                         </select>
                         <span class="icon icon-dropdown-up"></span>
                     </div>
-                    <a class="add" href="#">Ajouter</a>
+                    <a class="btn" href="#">Ajouter</a>
                 </div>
             </div>
             <div class="table-body">
@@ -39,6 +39,7 @@
                         <th v-if="isSelectable">
                             <input
                                 type="checkbox"
+                                class="icon-radio"
                                 @change="selectAll"
                                 :value="allSelected"
                                 v-model="allSelected">
@@ -51,6 +52,7 @@
                         <td v-if="isSelectable">
                             <input
                                 type="checkbox"
+                                class="icon-radio"
                                 @change="select"
                                 :value="item.id"
                                 v-model="userIds"></td>
@@ -284,21 +286,8 @@
                             transform: rotate(180deg);
                         }
                     }
-                    a.add {
-                        display: block;
-                        width: 140px;
+                    a.btn {
                         margin-left: 48px;
-                        background-color: $color-default;
-                        box-shadow: 0 4px 12px rgba(55, 81, 255, 0.24);
-                        border-radius: 8px;
-                        text-decoration: none;
-                        font-style: normal;
-                        font-weight: 600;
-                        font-size: 14px;
-                        line-height: 40px;
-                        text-align: center;
-                        letter-spacing: 0.2px;
-                        color: #FFFFFF;
                     }
                 }
             }
@@ -344,43 +333,6 @@
                                 justify-content: center;
                                 height: 100%;
                                 align-items: center;
-                            }
-                        }
-                        input {
-                            &[type="checkbox"] {
-                                display: block;
-                                height: 20px;
-                                width: 20px;
-                                appearance: none;
-                                border: 2px solid $gray-light;
-                                box-sizing: border-box;
-                                border-radius: 50%;
-                                &::-ms-check {
-                                    display: none;
-                                }
-                                &:focus {
-                                    outline: none;
-                                }
-                                &:hover {
-                                    cursor: pointer;
-                                }
-                                &:before {
-                                    display: block;
-                                    @include font-icon();
-                                    content: "\E919";
-                                    color: #ffffff;
-                                    font-size: 10px;
-                                    text-align: center;
-                                    line-height: 18px;
-                                }
-                            }
-                        }
-                        &.is-checked {
-                            input {
-                                &[type="checkbox"] {
-                                    background-color: $color-default;
-                                    border-color: $color-default;
-                                }
                             }
                         }
                     }

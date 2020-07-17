@@ -2,74 +2,65 @@
 
 @section('title', 'Connexion')
 
+@section('body-class', 'login')
+
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+    <section class="form">
+        <span class="lpdg-logo">L</span>
+        <span class="logo">LPDG</span>
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+            <h1>Se connecter à LPDG</h1>
+            <span class="sentence">Veuillez saisir votre email et mote de passe</span>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+            <div class="form-group">
+                <label class="label" for="email">email</label>
+                <input id="email"
+                       placeholder="Adresse email"
+                       type="email"
+                       class="input @error('email') is-invalid @enderror"
+                       name="email"
+                       value="{{ old('email') }}"
+                       required autocomplete="email" autofocus>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                @error('email')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
+                <div class="password-part">
+                    <label class="label" for="password">Mot de passe</label>
+                    @if (Route::has('password.request'))
+                        <a class="forgot" href="{{ route('password.request') }}">Mot de passe oublié ?</a>
+                    @endif
                 </div>
+
+                <input id="password"
+                       placeholder="Mot de passe"
+                       type="password"
+                       class="input @error('password') is-invalid @enderror" name="password" required
+                       autocomplete="current-password">
+
+                @error('password')
+                <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                @enderror
             </div>
-        </div>
-    </div>
-</div>
+
+            <div class="remember-part">
+                <input type="checkbox"
+                       name="remember"
+                       class="icon-radio checkbox-version"
+                       id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                <label class="form-check-label" for="remember">Se souvenir de moi</label>
+            </div>
+
+            <button type="submit" class="btn">Connexion</button>
+
+        </form>
+    </section>
 @endsection
