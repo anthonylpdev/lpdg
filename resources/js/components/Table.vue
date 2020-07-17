@@ -39,6 +39,7 @@
                         <th v-if="isSelectable">
                             <input
                                 type="checkbox"
+                                class="icon-radio"
                                 @change="selectAll"
                                 :value="allSelected"
                                 v-model="allSelected">
@@ -51,6 +52,7 @@
                         <td v-if="isSelectable">
                             <input
                                 type="checkbox"
+                                class="icon-radio"
                                 @change="select"
                                 :value="item.id"
                                 v-model="userIds"></td>
@@ -331,43 +333,6 @@
                                 justify-content: center;
                                 height: 100%;
                                 align-items: center;
-                            }
-                        }
-                        input {
-                            &[type="checkbox"] {
-                                display: block;
-                                height: 20px;
-                                width: 20px;
-                                appearance: none;
-                                border: 2px solid $gray-light;
-                                box-sizing: border-box;
-                                border-radius: 50%;
-                                &::-ms-check {
-                                    display: none;
-                                }
-                                &:focus {
-                                    outline: none;
-                                }
-                                &:hover {
-                                    cursor: pointer;
-                                }
-                                &:before {
-                                    display: block;
-                                    @include font-icon();
-                                    content: "\E919";
-                                    color: #ffffff;
-                                    font-size: 10px;
-                                    text-align: center;
-                                    line-height: 18px;
-                                }
-                            }
-                        }
-                        &.is-checked {
-                            input {
-                                &[type="checkbox"] {
-                                    background-color: $color-default;
-                                    border-color: $color-default;
-                                }
                             }
                         }
                     }

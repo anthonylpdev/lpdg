@@ -88,19 +88,101 @@ table {
 }
 .btn {
     display: block;
+    padding: 15px 24px 13px;
     width: 140px;
+    border: none;
     background-color: $color-default;
     box-shadow: 0 4px 12px rgba(55, 81, 255, 0.24);
     border-radius: 8px;
     text-decoration: none;
     font-style: normal;
-    font-weight: 600;
     font-size: 14px;
-    line-height: 40px;
     text-align: center;
     letter-spacing: 0.2px;
     color: #FFFFFF;
+    line-height: 20px;
 }
-
+.label {
+    display: block;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    color: $gray-default;
+    padding-bottom: 10px;
+}
+.input {
+    padding: 11px 8px 11px 16px;
+    margin-bottom: 24px;
+    background: #FCFDFE;
+    border: 1px solid #F0F1F7;
+    box-sizing: border-box;
+    border-radius: 8px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+    color: $gray-dark;
+    &::placeholder {
+        opacity: 0.4;
+    }
+}
+.lpdg-logo {
+    display: block;
+    text-align: center;
+    line-height: 32px;
+    margin-right: 12px;
+    color: #ffffff;
+    background-color: $color-default;
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+}
+input {
+    &.icon-radio {
+        display: block;
+        height: 20px;
+        width: 20px;
+        appearance: none;
+        border: 2px solid $gray-light;
+        box-sizing: border-box;
+        border-radius: 50%;
+        &::-ms-check {
+            display: none;
+        }
+        &:focus {
+            outline: none;
+        }
+        &:hover {
+            cursor: pointer;
+        }
+        &:before {
+            display: block;
+            @include font-icon();
+            content: "\E919";
+            color: #ffffff;
+            font-size: 10px;
+            text-align: center;
+            line-height: 18px;
+        }
+        &:checked {
+            &.icon-radio {
+                background-color: $color-default;
+                border-color: $color-default;
+            }
+        }
+    }
+    &.checkbox-version {
+        border-radius: 0;
+        height: 15px;
+        width: 15px;
+        &::before {
+            line-height: 14px;
+        }
+    }
+}
 // Page
 @import "page/forms";

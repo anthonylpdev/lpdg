@@ -1,7 +1,7 @@
 <template>
     <aside class="aside">
         <div class="head-part">
-            <span class="logo">L</span>
+            <span class="lpdg-logo">L</span>
             <span class="title">LPDG</span>
         </div>
         <nav class="menu-part">
@@ -75,17 +75,6 @@
             margin-bottom: 59px;
             padding-left: 24px;
             display: flex;
-            .logo {
-                display: block;
-                text-align: center;
-                line-height: 32px;
-                margin-right: 12px;
-                color: #ffffff;
-                background-color: $color-default;
-                height: 32px;
-                width: 32px;
-                border-radius: 50%;
-            }
             .title {
                 font-weight: bold;
                 font-size: 19px;

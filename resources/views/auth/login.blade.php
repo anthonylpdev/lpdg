@@ -6,6 +6,7 @@
 
 @section('content')
     <section class="form">
+        <span class="lpdg-logo">L</span>
         <span class="logo">LPDG</span>
         <form method="POST" action="{{ route('login') }}">
             @csrf
@@ -14,9 +15,14 @@
             <span class="sentence">Veuillez saisir votre email et mote de passe</span>
 
             <div class="form-group">
-                <label for="email">email</label>
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                       name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                <label class="label" for="email">email</label>
+                <input id="email"
+                       placeholder="Adresse email"
+                       type="email"
+                       class="input @error('email') is-invalid @enderror"
+                       name="email"
+                       value="{{ old('email') }}"
+                       required autocomplete="email" autofocus>
 
                 @error('email')
                 <span class="invalid-feedback" role="alert">
@@ -24,10 +30,17 @@
                 </span>
                 @enderror
 
-                <label for="password">Mot de passe</label>
+                <div class="password-part">
+                    <label class="label" for="password">Mot de passe</label>
+                    @if (Route::has('password.request'))
+                        <a class="forgot" href="{{ route('password.request') }}">Mot de passe oublié ?</a>
+                    @endif
+                </div>
 
-                <input id="password" type="password"
-                       class="form-control @error('password') is-invalid @enderror" name="password" required
+                <input id="password"
+                       placeholder="Mot de passe"
+                       type="password"
+                       class="input @error('password') is-invalid @enderror" name="password" required
                        autocomplete="current-password">
 
                 @error('password')
@@ -37,30 +50,17 @@
                 @enderror
             </div>
 
-            <div class="form-group row">
-                <div class="col-md-6 offset-md-4">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember"
-                               id="remember" {{ old('remember') ? 'checked' : '' }}>
+            <div class="remember-part">
+                <input type="checkbox"
+                       name="remember"
+                       class="icon-radio checkbox-version"
+                       id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                        <label class="form-check-label" for="remember">
-                            {{ __('Remember Me') }}
-                        </label>
-                    </div>
-                </div>
+                <label class="form-check-label" for="remember">Se souvenir de moi</label>
             </div>
 
-            <div class="form-group row mb-0">
-                <div class="col-md-8 offset-md-4">
-                    <button type="submit" class="btn">Connexion</button>
+            <button type="submit" class="btn">Connexion</button>
 
-                    @if (Route::has('password.request'))
-                        <a class="btn-link" href="{{ route('password.request') }}">
-                            {{ __('Forgot Your Password?') }}
-                        </a>
-                    @endif
-                </div>
-            </div>
         </form>
     </section>
 @endsection
